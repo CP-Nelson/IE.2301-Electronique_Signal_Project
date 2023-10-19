@@ -1,13 +1,11 @@
 void setup(){
-  Serial1.begin(9600);
-  Serial.println("Begin bluetooth");
-  Serial1.write("AT");
-  Serial1.write("AT+NAMETHE_THREE_MASCKETERS");
-
- 
   Serial.begin(9600);
   Serial.println("Begin Serial");
-  
+  Serial.println("Begin bluetooth");
+  Serial1.begin(9600);
+  Serial1.write("AT");
+  Serial1.write("AT+NAMETHE_THREE_MASCKETERS");
+  Serial1.read();
   }
 
 void loop()
