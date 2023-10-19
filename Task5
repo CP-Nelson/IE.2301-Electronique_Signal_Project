@@ -1,0 +1,21 @@
+void setup(){
+  Serial1.begin(9600);
+  Serial.println("Begin bluetooth");
+  Serial1.write("AT");
+  Serial1.write("AT+NAMETHE_THREE_MASCKETERS");
+
+ 
+  Serial.begin(9600);
+  Serial.println("Begin Serial");
+  
+  }
+
+void loop()
+{
+  if (Serial1.available()){
+    Serial.println("TEST 1 = SOMETHING IS THERE TO COMMUNICATE");
+    }
+  else{
+    Serial.println("Nothing");
+    } 
+  }
