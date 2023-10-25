@@ -1,6 +1,6 @@
-#define Red_LED PA_2
-#define Blue_LED PA_3
-#define Green_LED PA_4
+#define Red_LED PF_1
+#define Blue_LED PF_2
+#define Green_LED PF_3
 
 void setup() {
   // put your setup code here, to run once:
