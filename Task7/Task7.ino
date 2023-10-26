@@ -451,8 +451,8 @@ InitI2C();
 InitScreen();
 
 Display(motif);                           // affichage de l'image décrite dans le tabelau de donnée motif.h
-DisplayString(0,5,"APP ISEP");            // Ecriture sur la 5ème ligne 
-DisplayString(0,7,"Ecole du numerique");  // Ecriture sur la dernière ligne. 
+//DisplayString(0,5,"APP ISEP");            // Ecriture sur la 5ème ligne 
+DisplayString(0,7,"FOUR Musketeers");  // Ecriture sur la dernière ligne. 
 
 
 
