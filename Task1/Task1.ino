@@ -1,4 +1,4 @@
-#define sensorPin A10
+#define sensorPin 25
 
 void setup() {
  
@@ -10,7 +10,7 @@ void loop() {
   int reading = analogRead(sensorPin);
 
  
-  float voltage = reading * (3.3/ 4096);
+  float voltage = reading * (1.1/ 4095.0);
 
   
   float temperatureC = voltage/0.01;
@@ -18,14 +18,11 @@ void loop() {
  
   Serial.print("Temperature: ");
   Serial.print(temperatureC);
-   
+   -
   Serial.print("C  |  ");
+   Serial.println();
   
 
-  float temperatureF = (temperatureC * 9.0 / 5.0) + 32.0;
-  Serial.print(temperatureF);
- 
-  Serial.println("F");
 
   delay(1000); 
 }
