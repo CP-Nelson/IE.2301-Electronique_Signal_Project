@@ -32,7 +32,11 @@ void loop()
     }
   }
   peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
+  Serial.println("peakTopeak=");
   Serial.println(peakToPeak);
+  Serial.println();
+  Serial.println("Volts=");
   double volts = (peakToPeak * 3.3) / 4096;  // convert to volts
   Serial.println(volts);
+  delay(500);
 }
