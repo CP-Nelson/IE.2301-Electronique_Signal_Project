@@ -1,7 +1,6 @@
-function [outputArg1,outputArg2] = untitled(inputArg1,inputArg2)
-%UNTITLED 此处显示有关此函数的摘要
-%   此处显示详细说明
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
-end
+% 定义测试输入
+audio_data = zeros(1, 44100); % 假设的音频数据，这里用一秒钟的零数据代替
+Fs = 44100; % 典型的采样率
 
+% 调用函数
+[originalAudio, filteredAudio, Energy] = processAudio(audio_data, Fs);
