@@ -1,5 +1,5 @@
 const int sampleWindow = 50;  // Sample window width in mS (50 mS = 20Hz)
-int const AMP_PIN = A0;       // Preamp output pin connected to A0
+int const AMP_PIN = A6;       // Preamp output pin connected to A0
 unsigned int sample;
 
 void setup()
@@ -32,11 +32,15 @@ void loop()
     }
   }
   peakToPeak = signalMax - signalMin;  // max - min = peak-peak amplitude
-  Serial.println("peakTopeak=");
-  Serial.println(peakToPeak);
-  Serial.println();
-  Serial.println("Volts=");
-  double volts = (peakToPeak * 3.3) / 4096;  // convert to volts
-  Serial.println(volts);
-  delay(500);
+//  Serial.println("peakTopeak=");
+float dbvalue;
+ dbvalue = 20*log(analogRead(AMP_PIN)/300);
+  Serial.println(analogRead(AMP_PIN));
+//  Serial.println();
+//  Serial.println("Volts=");
+//  double volts = (peakToPeak * 5) / 1000;  // convert to volts
+//   normal silence is lower than 150, effective sound is between 500 to 3000
+//if(peakToPeak>1200)
+//  Serial.println(peakToPeak);
+  delay(100);
 }
