@@ -1,0 +1,70 @@
+[10:07 PM] Mariam CAMARA
+    Code to detect the sound :
+ // detect_son.c†: dÈfinit le point d'entrÈe pour l'application console.
+//
+
+
+#include "stdio.h"
+
+
+
+
+
+#define SIZE        10000   // Nombre d'Èchantillons du signal
+
+
+#define WINDOWS     200     // Nombre d'Èchantillons utilisÈs pour calculer la puissance
+#define SCALEOVERTWO 2048   // Amplitude max du signal
+
+
+int main(int argc, char* argv[])
+{​​​​​​​
+ int i,j;
+ int moyenne = 0;
+ float power;
+ float powermax = 0;
+ int indice = 0;
+
+
+// Calcul de la valeur moyenne du signal
+ for (i=0;i<SIZE;i++)
+     moyenne += Signal[i];
+ moyenne /= SIZE;
+ printf("Moyenne : %d\n",moyenne);
+
+
+
+ for (i=0;i<SIZE;i+=WINDOWS)
+ {​​​​​​​
+         power = 0.0;
+        for (j=0;j<WINDOWS;j++)
+        {​​​​​​​
+        power = (float) ((Signal[i+j]- (float) moyenne) / SCALEOVERTWO);
+        power = power * power;
+        }​​​​​​​
+        if (power > powermax)
+        {​​​​​​​
+            powermax = power;
+            indice = i;
+        }​​​​​​​
+ }​​​​​​​
+
+
+ printf("indice : %d powermax : %f\n",indice,powermax);
+getc(stdin);
+
+
+    return 0;
+}​​​​​​​
+ 
+
+
+
+
+
+
+
+
+
+
+
