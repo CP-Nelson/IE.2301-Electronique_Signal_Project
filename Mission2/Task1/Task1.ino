@@ -1,4 +1,4 @@
-#define sensorPin PE_1
+#define sensorPin A6
 
 void setup() {
   Serial.begin(9600);

@@ -12,18 +12,21 @@
 //-----------------------------------------------------------------------------
 
 // ##TAG##4 deb
-#define    MICROPHONE_PIN  A0
+#define    MICROPHONE_PIN  A1
+#define Red_LED PF_1
+#define Blue_LED PF_2
+#define Green_LED PF_3
 
 // You must determine the power measured with no sound
 // this is the low level value in the below line
-#define   LOW_LEVEL   500
+#define   LOW_LEVEL   100
 
 // You must determine the power measured with the maximum Sound
-#define   MAX_LEVEL   10000
+#define   MAX_LEVEL   1500
 
 // You have to choose the average acceptable value of power
 // It can be nn% of the MAX_LEVEL
-#define   AVR_LEVEL   0.5*MAX_LEVEL
+#define   AVR_LEVEL   0.2*MAX_LEVEL
 // ##TAG##4 end
 
 // Function define
@@ -41,6 +44,9 @@ void setup()
   Serial.begin(9600);
   // Initialize the sensor input as an analog input
   pinMode(MICROPHONE_PIN, INPUT);
+    pinMode(Red_LED, OUTPUT);
+  pinMode(Green_LED, OUTPUT);
+  pinMode(Blue_LED, OUTPUT);
 }
 
 
@@ -55,7 +61,7 @@ void loop()
   float SoundPower;   // puissance du Son
 
   Serial.println(" ");
-  Serial.println("--- Sound Power Measurement ---");
+//  Serial.println("--- Sound Power Measurement ---");
 
   // call the function.
 
@@ -65,11 +71,17 @@ void loop()
   Serial.print(" Power = ");
   Serial.println(SoundPower);
   if (SoundPower < LOW_LEVEL) {
+  digitalWrite(Blue_LED, LOW);   
+  digitalWrite(Red_LED, LOW); 
+  digitalWrite(Green_LED, HIGH); 
     Serial.println("Sound power below threshold. LED turned off.");
     // Power is too low = no sound
     // display an explicit message and turn on the white LED
   }
-  else if (SoundPower > AVR_LEVEL) {
+  else if (SoundPower > LOW_LEVEL) { 
+  digitalWrite(Blue_LED, HIGH);   
+  digitalWrite(Red_LED, LOW); 
+  digitalWrite(Green_LED, LOW); 
     Serial.println("The power of your input signal is too high.");
     // Power is too high = sound is painful
     // display an explicit message and turn on the red LED
@@ -81,7 +93,7 @@ void loop()
   }
 
   // wait 0.5 second
-  delay(250);
+  delay(500);
 }
 // ##TAG##5 end
 
@@ -128,9 +140,9 @@ double Read_Samples(void)
     // update next sample time
     nextime += SAMPLE_PERIOD;
   }
-  Serial.println(curtime/1000000);
+//  Serial.println(curtime/1000000);
   double power;
-  power = powerCalcul(1000,Buffer_Sample);
+  power = powerCalcul(SIZE_BUFF,Buffer_Sample);
 //power = 0.8;
   return power;
 }
@@ -159,13 +171,12 @@ double Read_Samples(void)
 //  return energyMean;
 //}
 
-double powerCalcul(int arraySize, short amplitude[1000]){
+double powerCalcul(int arraySize, short amplitude[SIZE_BUFF]){
   double energySum,power;
   for(int i = 0;i<arraySize;i++){
-    amplitude[i] -= 4080;
-    if(amplitude[i]>0)
-    energySum+=amplitude[i]*amplitude[i];
-    }
+    amplitude[i] -= 3200;
+    amplitude[i] /=10;
+    energySum+=amplitude[i]*amplitude[i];}
   double timeLength = arraySize/4000;
   power = energySum*4/1000;
   return power;

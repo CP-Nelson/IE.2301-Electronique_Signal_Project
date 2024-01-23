@@ -13,9 +13,11 @@
 #include "driverlib/pin_map.h"
 //#include "isep.h"
 #include "fontData.h"
+#include "stdio.h"
+#include "ftoa.c"
 
 #define PORTI2C   2    // Selection du port I2C 0, 1 ou 2
-
+#define poten 29
 
 
 //initialize I2C module 0
@@ -449,11 +451,18 @@ void setup() {
 
 InitI2C();
 InitScreen();
+Serial.begin (9600);
 
+int numBurritos = 3;
 Display(motif);                           // affichage de l'image décrite dans le tabelau de donnée motif.h
 //DisplayString(0,5,"APP ISEP");            // Ecriture sur la 5ème ligne 
-DisplayString(0,7,"FOUR Musketeers");  // Ecriture sur la dernière ligne. 
-
+//DisplayString(0,7,"FOUR Musketeers");  // Ecriture sur la dernière ligne. 
+char temperatureString[5];
+float temperature = 5.32190;
+int precision = 3;
+ftoa(temperature, temperatureString, precision);
+//String temperatureString = String(temperature);
+DisplayString(0, 7, temperatureString);
 
 
 // void test_fft(); // La fonction test_fft disponible dans le fichier fft.ino montre comment utiliser la fft
@@ -461,7 +470,16 @@ DisplayString(0,7,"FOUR Musketeers");  // Ecriture sur la dernière ligne.
 }
 
 void loop() {
-
+    int input = analogRead(poten);
+  float volt = input*(3.3/4096)*20;
+    Serial.println(volt);
+  char temperatureString[8];
+//float temperature = 5.32190;
+int precision = 2;
+ftoa(volt, temperatureString, precision);
+//String temperatureString = String(temperature);
+DisplayString(0, 7, temperatureString);
   // put your main code here, to run repeatedly: 
+  delay(1000);
 
 }
