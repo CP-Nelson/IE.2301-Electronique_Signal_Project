@@ -1,4 +1,4 @@
-Fs = 44300;
+Fs = 1000;
 noc1 = 1;
 noc2 = 2;
 nob = 16;
@@ -11,5 +11,5 @@ figure(1); plot(ch1);
 
 sound(ch1, Fs);
 
-filename = 'test_audio_file.wav';
+filename = 'peoplevoicetest.wav';
 audiowrite(filename,ch1,Fs)

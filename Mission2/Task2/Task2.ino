@@ -164,5 +164,5 @@ void loop() {
     Serial.print("VOC: ");
     Serial.println(voc);
 
-    delay(500);
+    delay(1000);
 }

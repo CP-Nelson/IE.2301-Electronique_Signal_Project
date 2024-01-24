@@ -1,5 +1,5 @@
 const int sampleWindow = 50;  // Sample window width in mS (50 mS = 20Hz)
-int const AMP_PIN = A1;       // Preamp output pin connected to A0
+int const AMP_PIN = A4;       // Preamp output pin connected to A0
 unsigned int sample;
 
 void setup()
